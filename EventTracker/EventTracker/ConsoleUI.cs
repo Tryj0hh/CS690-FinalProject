@@ -6,12 +6,18 @@ public class ConsoleUI
 {
     public void Show()
     {
+        string selection;
+        string eventSelection;
+        string volunteerSelection;
+        string taskSelection;
+        string toolSelection;
+        string reportSelection;
 
         do
         {
             AnsiConsole.Clear();
 
-            var selection = AnsiConsole.Prompt(
+            selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("What do you want to do?")
                     .AddChoices(new[]
@@ -25,20 +31,27 @@ public class ConsoleUI
                     }));
             
             if (selection == "Events"){
-                var eventSelection = AnsiConsole.Prompt(
-                new SelectionPrompt<string>()
-                    .Title("What do you want to do?")
-                    .AddChoices(new[]
-                    {
-                        "Add Event",
-                        "Modify Event",
-                        "Delete Event",
-                        "Back"
-                    }));
+                do 
+                {
+                    AnsiConsole.Clear();
+
+                    eventSelection = AnsiConsole.Prompt(
+                    new SelectionPrompt<string>()
+                        .Title("What do you want to do?")
+                        .AddChoices(new[]
+                        {
+                            "Add Event",
+                            "Modify Event",
+                            "Delete Event",
+                            "Back"
+                        }));
+                } while (eventSelection != "Back");
             }
 
             else if (selection == "Volunteers"){
-                var volunteerSelection = AnsiConsole.Prompt(
+                do
+                {
+                volunteerSelection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("What do you want to do?")
                     .AddChoices(new[]
@@ -48,10 +61,13 @@ public class ConsoleUI
                         "Delete Volunteer",
                         "Back"
                     }));
+                } while (volunteerSelection != "Back");
             }
 
             else if (selection == "Tasks"){
-                var taskSelection = AnsiConsole.Prompt(
+                do
+                {
+                taskSelection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("What do you want to do?")
                     .AddChoices(new[]
@@ -61,10 +77,13 @@ public class ConsoleUI
                         "Delete Task",
                         "Back"
                     }));
+                } while (taskSelection != "Back");
             }
 
             else if (selection == "Tools"){
-                var toolSelection = AnsiConsole.Prompt(
+                do
+                {
+                toolSelection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("What do you want to do?")
                     .AddChoices(new[]
@@ -74,10 +93,13 @@ public class ConsoleUI
                         "Delete Tool",
                         "Back"
                     }));
+                } while (toolSelection != "Back");    
             }
 
             else if (selection == "Reports"){
-                var reportSelection = AnsiConsole.Prompt(
+                do
+                {
+                reportSelection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()
                     .Title("What do you want to do?")
                     .AddChoices(new[]
@@ -86,6 +108,7 @@ public class ConsoleUI
                         "Show Total Sign Ups",
                         "Back"
                     }));
+                } while (reportSelection != "Back");
             }
 
         } while (selection !="End");

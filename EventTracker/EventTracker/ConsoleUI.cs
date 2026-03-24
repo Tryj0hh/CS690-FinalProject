@@ -47,7 +47,6 @@ public class ConsoleUI
                         .AddChoices(new[]
                         {
                             "Add Event",
-                            "Modify Event",
                             "Delete Event",
                             "Back"
                         }));
@@ -97,7 +96,6 @@ public class ConsoleUI
                     .AddChoices(new[]
                     {
                         "Add Volunteer",
-                        "Modify Volunteer",
                         "Delete Volunteer",
                         "Back"
                     }));
@@ -147,7 +145,6 @@ public class ConsoleUI
                     .AddChoices(new[]
                     {
                         "Add Task",
-                        "Modify Task",
                         "Delete Task",
                         "Back"
                     }));
@@ -197,7 +194,6 @@ public class ConsoleUI
                     .AddChoices(new[]
                     {
                         "Add Tool",
-                        "Modify Tool",
                         "Delete Tool",
                         "Back"
                     }));

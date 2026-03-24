@@ -40,9 +40,9 @@ public class DataManager
             {
                 var parts = line.Split("|");
 
-                if (parts.Length == 2)
+                if (parts.Length == 2 && int.TryParse(parts[1], out int max))
                 {
-                    Events.Add(new Event(parts[0], int.Parse(parts[1])));
+                    Events.Add(new Event(parts[0], max));
                 }
             }
         }
@@ -77,7 +77,17 @@ public class DataManager
         {
             foreach (var line in File.ReadAllLines("volunteers.txt"))
             {
-                Volunteers.Add(new Volunteer(line));
+                var parts = line.Split("|");
+
+                if (parts.Length == 4)
+                {
+                    Volunteers.Add(new Volunteer(
+                        parts[0],
+                        parts[1],
+                        parts[2],
+                        parts[3]
+                    ));
+                }
             }
         }
     }
@@ -85,7 +95,7 @@ public class DataManager
     public void AddVolunteer(Volunteer v)
     {
         Volunteers.Add(v);
-        volunteerFile.AppendLine(v.Name);
+        volunteerFile.AppendLine($"{v.Name}|{v.Event}|{v.Tool}|{v.TaskItem}");
     }
 
     public void RemoveVolunteer(Volunteer v)
@@ -100,7 +110,8 @@ public class DataManager
 
         foreach (var v in Volunteers)
         {
-            File.AppendAllText("volunteers.txt", v.Name + Environment.NewLine);
+            File.AppendAllText("volunteers.txt",
+                $"{v.Name}|{v.Event}|{v.Tool}|{v.TaskItem}" + Environment.NewLine);
         }
     }
 

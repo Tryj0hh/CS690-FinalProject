@@ -101,9 +101,43 @@ public class ConsoleUI
                     }));
 
                     if (volunteerSelection == "Add Volunteer"){
+                        if (dataManager.Events.Count == 0){
+                                AnsiConsole.WriteLine("Please create an event before adding volunteers");
+                                AnsiConsole.WriteLine("Press any key to continue");
+                                Console.ReadKey();
+                                Console.Clear();
+                                continue;
+                        }
+                        else if (dataManager.Tasks.Count == 0){
+                                AnsiConsole.WriteLine("Please add a task before adding volunteers");
+                                AnsiConsole.WriteLine("Press any key to continue");
+                                Console.ReadKey();
+                                Console.Clear();
+                                continue;
+                        } 
+                        else if (dataManager.Tools.Count == 0){
+                                AnsiConsole.WriteLine("Please add a tool before adding volunteers");
+                                AnsiConsole.WriteLine("Press any key to continue");
+                                Console.ReadKey();
+                                Console.Clear();
+                                continue;
+                        }
                         var name = AnsiConsole.Ask<string>("Enter volunteer name:");
+                        var selectedEvent = AnsiConsole.Prompt(
+                                new SelectionPrompt<Event>()
+                                    .Title("Select event:")
+                                    .AddChoices(dataManager.Events));
+                        var selectedTask = AnsiConsole.Prompt(
+                                new SelectionPrompt<TaskItem>()
+                                    .Title("Select task:")
+                                    .AddChoices(dataManager.Tasks));
+                        var selectedTool = AnsiConsole.Prompt(
+                                new SelectionPrompt<Tool>()
+                                    .Title("Select tool:")
+                                    .AddChoices(dataManager.Tools));
 
-                        dataManager.AddVolunteer(new Volunteer(name));
+
+                        dataManager.AddVolunteer(new Volunteer(name, selectedEvent.Name, selectedTask.Name, selectedTool.Name));
 
                         AnsiConsole.WriteLine("You have added a volunteer");
                         AnsiConsole.WriteLine("Click any key to continue");
@@ -246,6 +280,17 @@ public class ConsoleUI
                         "Show Total Sign Ups",
                         "Back"
                     }));
+                    if (reportSelection == "Generate complete report"){
+                        AnsiConsole.WriteLine("Volunteer Report: ");
+                        foreach (var v in dataManager.Volunteers)
+                        {
+                            AnsiConsole.WriteLine(v.ToString());
+                        }
+                        AnsiConsole.WriteLine("Press any key to continue");
+                        Console.ReadKey();
+                        Console.Clear();
+
+                    }
                 } while (reportSelection != "Back");
             }
 

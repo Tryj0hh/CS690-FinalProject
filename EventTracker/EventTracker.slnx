@@ -1,2 +1,4 @@
 <Solution>
+  <Project Path="EventTracker.Tests/EventTracker.Tests.csproj" />
+  <Project Path="EventTracker/EventTracker.csproj" />
 </Solution>

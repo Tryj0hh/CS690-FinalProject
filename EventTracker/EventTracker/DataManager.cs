@@ -95,7 +95,7 @@ public class DataManager
     public void AddVolunteer(Volunteer v)
     {
         Volunteers.Add(v);
-        volunteerFile.AppendLine($"{v.Name}|{v.Event}|{v.Tool}|{v.TaskItem}");
+        volunteerFile.AppendLine($"{v.Name}|{v.Event}|{v.TaskItem}|{v.Tool}");
     }
 
     public void RemoveVolunteer(Volunteer v)

@@ -127,6 +127,13 @@ public class ConsoleUI
                                 new SelectionPrompt<Event>()
                                     .Title("Select event:")
                                     .AddChoices(dataManager.Events));
+                        if (dataManager.IsEventFull(selectedEvent)){
+                            AnsiConsole.WriteLine($"'{selectedEvent.Name}' is full. No more volunteers can sign up.");
+                            AnsiConsole.WriteLine("Press any key to continue");
+                            Console.ReadKey();
+                            Console.Clear();
+                            continue;
+                        }
                         var selectedTask = AnsiConsole.Prompt(
                                 new SelectionPrompt<TaskItem>()
                                     .Title("Select task:")
@@ -289,7 +296,19 @@ public class ConsoleUI
                         AnsiConsole.WriteLine("Press any key to continue");
                         Console.ReadKey();
                         Console.Clear();
+                    }
+                    else if (reportSelection == "Show Total Sign Ups"){
+                        var selectedReportEvent = AnsiConsole.Prompt(
+                            new SelectionPrompt<Event>()
+                                .Title("Select event:")
+                                .AddChoices(dataManager.Events));
 
+                        int totalSignUps = dataManager.Volunteers.Count(v => v.Event == selectedReportEvent.Name);
+
+                        AnsiConsole.WriteLine($"Total sign ups for '{selectedReportEvent.Name}': {totalSignUps}");
+                        AnsiConsole.WriteLine("Press any key to continue");
+                        Console.ReadKey();
+                        Console.Clear(); 
                     }
                 } while (reportSelection != "Back");
             }

@@ -98,6 +98,12 @@ public class DataManager
         volunteerFile.AppendLine($"{v.Name}|{v.Event}|{v.TaskItem}|{v.Tool}");
     }
 
+    public bool IsEventFull(Event ev)
+    {
+    int signUps = Volunteers.Count(v => v.Event == ev.Name);
+    return signUps >= ev.MaxVolunteers;
+    }
+
     public void RemoveVolunteer(Volunteer v)
     {
         Volunteers.Remove(v);
